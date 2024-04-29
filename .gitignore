@@ -1,0 +1,16 @@
+# compiled output
+dist/*
+.env
+
+#node packages
+node_modules/*
+
+#confidential info
+bin/
+
+#logs
+logs/
+
+#ssl 
+src/ssl/*
+
