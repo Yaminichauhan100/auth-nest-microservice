@@ -1,20 +1,19 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
+import { AuditLogController} from './audit-log.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModule } from 'src/database/database.module';
-import { UserDocument, UserSchema } from 'src/models/user.schema';
 import { LocalStategy } from 'src/strategies/local.strategy';
-import { JwtStrategy } from 'src/strategies/jwt.strategy';
-import { AuthRepository } from './auth.repositoty';
+import { AuthRepository } from './audit-log.repositoty';
 import { LoggerModule } from 'src/logger/logger.module';
+import { AuditLogDocument, AuditLogSchema } from 'src/models/audit-log.schema';
+import { AuditLogService } from './audit-log.service';
 @Module({
   imports: [
     DatabaseModule,
     DatabaseModule.forFeature([
-      { name: UserDocument.name, schema: UserSchema },
+      { name: AuditLogDocument.name, schema: AuditLogSchema },
     ]),
     LoggerModule,
     ConfigModule.forRoot({
@@ -36,7 +35,7 @@ import { LoggerModule } from 'src/logger/logger.module';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService, LocalStategy, JwtStrategy, AuthRepository],
+  controllers: [AuditLogController],
+  providers: [AuditLogService, LocalStategy, AuthRepository],
 })
-export class AuthModule {}
+export class AuditLogModule {}
