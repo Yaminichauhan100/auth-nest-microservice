@@ -3,13 +3,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { AbstractRepository } from 'src/database/abstract.repository';
-import { UserDocument } from 'src/models/user.schema';
+import { MarketingDocument } from 'src/models/marketing.schema';
 
 @Injectable()
-export class AuthRepository extends AbstractRepository<UserDocument> {
+export class AuthRepository extends AbstractRepository<MarketingDocument> {
   protected readonly logger = new Logger(AuthRepository.name);
 
-  constructor(@InjectModel(UserDocument.name) authModel: Model<UserDocument>) {
-    super(authModel);
+  constructor(@InjectModel(MarketingDocument.name) MarketingModel: Model<MarketingDocument>) {
+    super(MarketingModel);
   }
 }
