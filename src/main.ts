@@ -6,17 +6,18 @@ import * as cookieParser from 'cookie-parser';
 import { Logger } from 'nestjs-pino';
 import { AuthModule } from './user/auth/auth.module';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { AppModule } from './app.module';
 
 
 async function bootstrap() {
-  const app = await NestFactory.create(AuthModule);
+  const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   app.use(cookieParser());
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER))
   //  app.useLogger(app.get(Logger));
   // await app.startAllMicroservices();
-  const port = configService.get('HTTP_PORT') || 3000;
+  const port = configService.get('HTTP_PORT')
   await app.listen(port);
   
 }
