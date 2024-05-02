@@ -23,3 +23,23 @@ export class UserRegisterDto {
   password: string;
 
 }
+
+export class CreateUserDto {
+  @IsEmail()
+  email: string;
+
+  @IsStrongPassword()
+  password: string;
+
+  // @IsOptional()
+  // @IsArray()
+  // @IsString({ each: true })
+  // @IsNotEmpty({ each: true })
+  // roles?: string[];
+}
+
+export class GetUserDto {
+  @IsString()
+  @IsNotEmpty()
+  _id: string;
+}

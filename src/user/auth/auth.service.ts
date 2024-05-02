@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { AuthRepository } from './auth.repositoty';
-import { UserRegisterDto } from 'src/dto/auth.dto';
+import { CreateUserDto, GetUserDto, UserRegisterDto } from 'src/dto/user.dto';
 import * as bcrypt from 'bcryptjs';
 import { UserDocument } from 'src/models/user.schema';
 import { TokenPayload } from 'src/interfaces/token-payload.interface';
@@ -16,14 +16,14 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly authRepository: AuthRepository,
   ) {}
-  async create(userRegisterDto: UserRegisterDto) {
+  async create(userRegisterDto: CreateUserDto) {
     await this.validateCreateUserDto(userRegisterDto);
     return this.authRepository.create({
       ...userRegisterDto,
       password: await bcrypt.hash(userRegisterDto.password, 10),
     });
   }
-  private async validateCreateUserDto(userRegisterDto: UserRegisterDto) {
+  private async validateCreateUserDto(userRegisterDto: CreateUserDto) {
     try {
       await this.authRepository.findOne({ email: userRegisterDto.email });
     } catch (err) {
@@ -55,5 +55,8 @@ export class AuthService {
       expires,
     });
     return token;
+  }
+  async getUser(getUserDto: GetUserDto) {
+    return this.authRepository.findOne(getUserDto);
   }
 }
