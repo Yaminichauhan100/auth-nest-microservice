@@ -7,7 +7,7 @@ import { DatabaseModule } from 'src/database/database.module';
 import { LocalStategy } from 'src/strategies/local.strategy';
 import { AuthRepository } from './audit-log.repositoty';
 import { LoggerModule } from 'src/logger/logger.module';
-import { AuditLogDocument, AuditLogSchema } from 'src/models/audit-log.schema';
+import { AuditLogDocument, AuditLogSchema } from 'src/models/audit.log.schema';
 import { AuditLogService } from './audit-log.service';
 @Module({
   imports: [

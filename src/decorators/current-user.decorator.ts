@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { AuditLogDocument } from 'src/models/audit-log.schema';
+import { AuditLogDocument } from 'src/models/audit.log.schema';
 
 const getCurrentUserByContext = (context: ExecutionContext): AuditLogDocument => {
   return context.switchToHttp().getRequest().user;
