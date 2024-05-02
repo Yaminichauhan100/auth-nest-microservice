@@ -1,6 +1,5 @@
 # compiled output
 dist/*
-.env
 
 #node packages
 node_modules/*
@@ -13,4 +12,3 @@ logs/
 
 #ssl 
 src/ssl/*
-
