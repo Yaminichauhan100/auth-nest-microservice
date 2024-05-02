@@ -1,19 +1,25 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import * as Joi from 'joi';
-import { MarketingController} from './marketing.controller';
+import { ReportingAnalysisController } from './reporting-analysis.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModule } from 'src/database/database.module';
 import { LocalStategy } from 'src/strategies/local.strategy';
-import { AuthRepository } from './marketing.repositoty';
+import { AuthRepository } from './reporting-analysis.repositoty';
 import { LoggerModule } from 'src/logger/logger.module';
-import { MarketingService,  } from './marketing.service';
-import { MarketingDocument, MarketingSchema } from 'src/models/marketing.schema';
+import { ReportingAnalysisService } from './reporting-analysis.service';
+import {
+  ReportingAnalyisisSchema,
+  ReportingAnalysisDocument,
+} from 'src/models/reporting-analysis.schema';
 @Module({
   imports: [
     DatabaseModule,
     DatabaseModule.forFeature([
-      { name: MarketingDocument.name, schema: MarketingSchema },
+      {
+        name: ReportingAnalysisDocument.name,
+        schema: ReportingAnalyisisSchema,
+      },
     ]),
     LoggerModule,
     ConfigModule.forRoot({
@@ -35,7 +41,7 @@ import { MarketingDocument, MarketingSchema } from 'src/models/marketing.schema'
       inject: [ConfigService],
     }),
   ],
-  controllers: [MarketingController],
-  providers: [MarketingService, LocalStategy, AuthRepository],
+  controllers: [ReportingAnalysisController],
+  providers: [ReportingAnalysisService, LocalStategy, AuthRepository],
 })
-export class MarketingModule {}
+export class ReportingAnalysisModule {}
